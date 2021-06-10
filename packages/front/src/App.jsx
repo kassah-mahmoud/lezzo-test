@@ -1,5 +1,7 @@
 import React from "react";
+import { Router, Redirect } from "@reach/router";
 import StoresTable from "./components/StoresTable";
+import SingleStore from "./components/SingleStore";
 
 function App() {
   return (
@@ -12,7 +14,11 @@ function App() {
         </div>
       </div>
       <div className="w-full bg-white rounded-md px-5 md:px-10 py-5 mb-10">
-        <StoresTable />
+        <Router>
+          <Redirect from="/" to="/stores" />
+          <StoresTable path="/stores" />
+          <SingleStore path="/stores/:storeId" />
+        </Router>
       </div>
     </div>
   );

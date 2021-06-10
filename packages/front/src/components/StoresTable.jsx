@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@material-ui/data-grid";
+import { Link } from "@reach/router";
 import { fetchAllStores } from "../features/stores/storesAction";
 import Modal from "./shared/Modal";
 import { Button } from "@material-ui/core";
@@ -37,11 +38,27 @@ const StoresTable = () => {
       headerName: "Logo",
       width: 150,
       renderCell: (params) => (
-        <img className="w-16 rounded-md" src={params.row.logo} />
+        <img
+          className="w-16 rounded-md"
+          src={params.row.logo && `/${params.row.logo}`}
+        />
       ),
     },
     { field: "id", headerName: "ID", width: 150 },
     { field: "name", headerName: "Name", width: 150 },
+    {
+      field: "link",
+      headerName: "Details",
+      width: 150,
+      renderCell: (params) => (
+        <Link
+          className="text-blue-500"
+          to={`/stores/${params.row.id.toString()}`}
+        >
+          See more
+        </Link>
+      ),
+    },
   ];
 
   return (
@@ -104,9 +121,6 @@ const StoresTable = () => {
           </div>
         )}
       </div>
-      <Modal>
-        <div>test modal</div>
-      </Modal>
     </>
   );
 };

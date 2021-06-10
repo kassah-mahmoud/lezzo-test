@@ -1,5 +1,11 @@
 import axios from "axios";
 import {
+  fetchSingleStoreLoading,
+  fetchSingleStoreFail,
+  fetchSingleStoreSuccess,
+} from "./storeSlice";
+
+import {
   fetchStoresFail,
   fetchStoresLoading,
   fetchStoresSuccess,
@@ -23,3 +29,17 @@ export const fetchAllStores =
       dispatch(fetchStoresFail("Something went wrong!"));
     }
   };
+
+export const fetchSingleStore = (id) => async (dispatch) => {
+  console.log(id);
+  dispatch(fetchSingleStoreLoading());
+  try {
+    const res = await axios.get(`/api/stores/${id}`);
+
+    dispatch(fetchSingleStoreSuccess(res.data));
+    console.log(res.data);
+  } catch (error) {
+    console.log(error);
+    dispatch(fetchSingleStoreFail("Something went wrong!"));
+  }
+};
