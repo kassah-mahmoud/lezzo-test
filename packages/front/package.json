@@ -6,10 +6,15 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/data-grid": "^4.0.0-alpha.31",
+    "@reduxjs/toolkit": "^1.6.0",
     "autoprefixer": "^10.2.6",
+    "axios": "^0.21.1",
     "postcss": "^8.3.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-redux": "^7.2.4",
     "tailwindcss": "^2.1.4"
   },
   "devDependencies": {
