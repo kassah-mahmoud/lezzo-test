@@ -1,15 +1,19 @@
 const express = require("express");
+const cors = require("cors");
+
 const router = require("./routes");
 
-const { sequelize, Store } = require("./database/models");
+const { sequelize } = require("./database/models");
 // const bodyParser = require("body-parser");
 
 const { port } = require("./config/server");
 
 const app = express();
+
+app.use(cors());
 app.use("/public/images", express.static("public/images"));
 app.use(express.json());
-app.use(router);
+app.use("/api", router);
 
 app.listen(port, async (err) => {
   if (err) {

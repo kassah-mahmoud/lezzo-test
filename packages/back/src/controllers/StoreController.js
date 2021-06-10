@@ -23,6 +23,8 @@ class StoreController {
     const { name } = req.body;
     const logo = req.file ? req.file.path : null;
 
+    //todo validate the input
+
     try {
       const newStore = await Store.create({
         name: name,

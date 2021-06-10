@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Mahmoud Kassah <kassah.webdev@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "lerna run start --stream"
+  },
   "devDependencies": {
     "lerna": "^4.0.0",
     "sequelize-cli": "^6.2.0"
