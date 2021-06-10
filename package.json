@@ -5,13 +5,11 @@
   "author": "Mahmoud Kassah <kassah.webdev@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "install": "lerna bootstrap",
     "start": "lerna run start --stream"
   },
   "devDependencies": {
-    "lerna": "^4.0.0",
-    "sequelize-cli": "^6.2.0"
+    "lerna": "^4.0.0"
   },
-  "dependencies": {
-    "multer": "^1.4.2"
-  }
+  "dependencies": {}
 }
