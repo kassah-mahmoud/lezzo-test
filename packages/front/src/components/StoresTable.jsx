@@ -76,10 +76,9 @@ const StoresTable = () => {
         />
       </Modal>
       <div className="flex h-[600px]">
-        {/* {isLoading && <div>Loading...</div>} */}
         {error ? (
           <div className="text-red-500">{error}</div>
-        ) : stores.data && stores.data.length > 0 ? (
+        ) : (
           <div className="w-full h-full">
             <div className="w-full flex py-2 justify-start">
               <Button
@@ -90,34 +89,36 @@ const StoresTable = () => {
                 Add New Store
               </Button>
             </div>
-            <div className="w-full h-[70%]">
-              <DataGrid
-                rows={stores.data}
-                columns={columns}
-                page={pagination.currentPage}
-                pageSize={pagination.size}
-                rowsPerPageOptions={[5, 10, 15]}
-                paginationMode="server"
-                loading={isLoading}
-                rowCount={stores.count}
-                onPageChange={(params) => {
-                  setPagination((pagination) => ({
-                    ...pagination,
-                    currentPage: params.page,
-                  }));
-                }}
-                onPageSizeChange={(params) => {
-                  setPagination((pagination) => ({
-                    ...pagination,
-                    size: params.pageSize,
-                  }));
-                }}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="my-4 text-lg font-medium text-gray-300">
-            It seems there are no stores yes
+            {stores.data && stores.data.length > 0 ? (
+              <div className="w-full h-[70%]">
+                <DataGrid
+                  rows={stores.data}
+                  columns={columns}
+                  page={pagination.currentPage}
+                  pageSize={pagination.size}
+                  rowsPerPageOptions={[5, 10, 15]}
+                  paginationMode="server"
+                  loading={isLoading}
+                  rowCount={stores.count}
+                  onPageChange={(params) => {
+                    setPagination((pagination) => ({
+                      ...pagination,
+                      currentPage: params.page,
+                    }));
+                  }}
+                  onPageSizeChange={(params) => {
+                    setPagination((pagination) => ({
+                      ...pagination,
+                      size: params.pageSize,
+                    }));
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="my-4 text-lg font-medium text-gray-300">
+                It seems there are no stores yes
+              </div>
+            )}
           </div>
         )}
       </div>
