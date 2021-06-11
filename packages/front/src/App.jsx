@@ -13,7 +13,7 @@ function App() {
           </h1>
         </div>
       </div>
-      <div className="w-full bg-white rounded-md px-5 md:px-10 py-5 mb-10">
+      <div className="w-full bg-white rounded-md px-5 md:px-10 py-5 mb-10 overflow-hidden overflow-y-auto">
         <Router>
           <Redirect from="/" to="/stores" />
           <StoresTable path="/stores" />

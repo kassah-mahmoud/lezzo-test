@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleStore } from "../features/stores/storesAction";
 import Modal from "./shared/Modal";
 import { Button } from "@material-ui/core";
-import AddStore from "./AddStore";
+import AddCategory from "./AddCategory";
+import AddProduct from "./AddProduct";
+import CategoryList from "./shared/CategoryList";
 
 const SingleStore = ({ storeId }) => {
   const { store, isLoading, error } = useSelector((state) => {
@@ -14,12 +16,26 @@ const SingleStore = ({ storeId }) => {
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
+  const [productFormState, setProductFormState] = useState({
+    open: false,
+    categoryId: null,
+  });
+
+  const handleCloseProductForm = () =>
+    setProductFormState((state) => ({ ...state, open: false }));
+
+  const onOpenProductForm = (categoryId) => {
+    setProductFormState({ categoryId: categoryId, open: true });
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("mounted");
     dispatch(fetchSingleStore(storeId));
   }, [storeId]);
 
+  console.log(store);
   return (
     <>
       <Modal
@@ -27,8 +43,21 @@ const SingleStore = ({ storeId }) => {
         open={open}
         handleClose={handleCloseModal}
       >
-        {/* <AddStore onSuccess={fetchSingleStore.bind(null, storeId)} /> */}
-        Add Category
+        <AddCategory
+          storeId={store && store.id}
+          onSuccess={fetchSingleStore.bind(null, storeId)}
+        />
+      </Modal>
+
+      <Modal
+        title="Create New Product"
+        open={productFormState.open}
+        handleClose={handleCloseProductForm}
+      >
+        <AddProduct
+          categoryId={productFormState.categoryId}
+          onSuccess={fetchSingleStore.bind(null, storeId)}
+        />
       </Modal>
       <div className="flex h-[600px]">
         {isLoading ? (
@@ -56,6 +85,11 @@ const SingleStore = ({ storeId }) => {
 
                 <div className="text-3xl font-bold">{store.name}</div>
               </div>
+
+              <CategoryList
+                categories={store.categories}
+                onOpenProductForm={onOpenProductForm}
+              />
             </div>
           </div>
         ) : (
